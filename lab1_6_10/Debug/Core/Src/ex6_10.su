@@ -1,0 +1,3 @@
+ex6_10.c:9:6:setNumberOnClock	16	static
+ex6_10.c:15:6:clearAllClock	8	static
+ex6_10.c:21:6:digitalClock	16	static
