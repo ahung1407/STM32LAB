@@ -39,8 +39,6 @@ void digitalClock(){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4<<temp, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4<<temp2, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4<<hour, GPIO_PIN_RESET);\
-	HAL_Delay(10);
-	clearAllClock();
 	second++;
 
 }
