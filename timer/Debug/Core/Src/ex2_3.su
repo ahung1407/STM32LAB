@@ -1,0 +1,6 @@
+ex2_3.c:15:6:init_ex2	8	static
+ex2_3.c:27:6:run_ex2	8	static
+ex2_3.c:81:6:update7SEG	16	static
+ex2_3.c:134:6:DOT	8	static
+ex2_3.c:141:6:updateClockBuffer	16	static
+ex2_3.c:148:6:run_index	8	static

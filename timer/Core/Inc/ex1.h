@@ -5,8 +5,8 @@
  *      Author: admim
  */
 
-#ifndef INC_EX2_H_
-#define INC_EX2_H_
+#ifndef INC_EX1_H_
+#define INC_EX1_H_
 #include "main.h"
 #include "software_timer.h"
 
@@ -15,4 +15,4 @@ void display7SEG(int counter);
 void run_excercise2();
 
 
-#endif /* INC_EX2_H_ */
+#endif /* INC_EX1_H_ */

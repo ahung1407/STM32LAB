@@ -4,8 +4,8 @@
  *  Created on: Sep 22, 2024
  *      Author: admim
  */
-#include "ex2.h"
-void init_excercise2(){
+#include <ex1.h>
+void init_excercise1(){
 	HAL_GPIO_WritePin(LED_A_GPIO_Port, LED_A_Pin, SET);
 	HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, SET);
 	HAL_GPIO_WritePin(LED_C_GPIO_Port, LED_C_Pin, SET);
@@ -124,7 +124,7 @@ void display7SEG(int counter){
 		}
 }
 
-void run_excercise2(){
+void run_excercise1(){
 	if(isTimerExpired(0)==1){
 		setTimer(0,500);
 		display7SEG(1);
