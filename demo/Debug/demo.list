@@ -1295,7 +1295,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
- 8000ac8:	f000 f810 	bl	8000aec <SystemClock_Config>
+ 8000ac8:	f000 f811 	bl	8000aee <SystemClock_Config>
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -1319,106 +1319,105 @@ int main(void)
  8000adc:	f7ff fb5c 	bl	8000198 <run_excercise3>
 	 run_excercise5();
  8000ae0:	f7ff ffa6 	bl	8000a30 <run_excercise5>
-	  HAL_Delay(100);
- 8000ae4:	2064      	movs	r0, #100	; 0x64
- 8000ae6:	f000 f987 	bl	8000df8 <HAL_Delay>
+	  HAL_Delay(1000);
+ 8000ae4:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8000ae8:	f000 f986 	bl	8000df8 <HAL_Delay>
 	 run_excercise3();
- 8000aea:	e7f7      	b.n	8000adc <main+0x1c>
+ 8000aec:	e7f6      	b.n	8000adc <main+0x1c>
 
-08000aec <SystemClock_Config>:
+08000aee <SystemClock_Config>:
 /**
   * @brief System Clock Configuration
   * @retval None
   */
 void SystemClock_Config(void)
 {
- 8000aec:	b580      	push	{r7, lr}
- 8000aee:	b090      	sub	sp, #64	; 0x40
- 8000af0:	af00      	add	r7, sp, #0
+ 8000aee:	b580      	push	{r7, lr}
+ 8000af0:	b090      	sub	sp, #64	; 0x40
+ 8000af2:	af00      	add	r7, sp, #0
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 8000af2:	f107 0318 	add.w	r3, r7, #24
- 8000af6:	2228      	movs	r2, #40	; 0x28
- 8000af8:	2100      	movs	r1, #0
- 8000afa:	4618      	mov	r0, r3
- 8000afc:	f001 f830 	bl	8001b60 <memset>
+ 8000af4:	f107 0318 	add.w	r3, r7, #24
+ 8000af8:	2228      	movs	r2, #40	; 0x28
+ 8000afa:	2100      	movs	r1, #0
+ 8000afc:	4618      	mov	r0, r3
+ 8000afe:	f001 f82f 	bl	8001b60 <memset>
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 8000b00:	1d3b      	adds	r3, r7, #4
- 8000b02:	2200      	movs	r2, #0
- 8000b04:	601a      	str	r2, [r3, #0]
- 8000b06:	605a      	str	r2, [r3, #4]
- 8000b08:	609a      	str	r2, [r3, #8]
- 8000b0a:	60da      	str	r2, [r3, #12]
- 8000b0c:	611a      	str	r2, [r3, #16]
+ 8000b02:	1d3b      	adds	r3, r7, #4
+ 8000b04:	2200      	movs	r2, #0
+ 8000b06:	601a      	str	r2, [r3, #0]
+ 8000b08:	605a      	str	r2, [r3, #4]
+ 8000b0a:	609a      	str	r2, [r3, #8]
+ 8000b0c:	60da      	str	r2, [r3, #12]
+ 8000b0e:	611a      	str	r2, [r3, #16]
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
- 8000b0e:	2302      	movs	r3, #2
- 8000b10:	61bb      	str	r3, [r7, #24]
+ 8000b10:	2302      	movs	r3, #2
+ 8000b12:	61bb      	str	r3, [r7, #24]
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 8000b12:	2301      	movs	r3, #1
- 8000b14:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8000b14:	2301      	movs	r3, #1
+ 8000b16:	62bb      	str	r3, [r7, #40]	; 0x28
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
- 8000b16:	2310      	movs	r3, #16
- 8000b18:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000b18:	2310      	movs	r3, #16
+ 8000b1a:	62fb      	str	r3, [r7, #44]	; 0x2c
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 8000b1a:	2302      	movs	r3, #2
- 8000b1c:	637b      	str	r3, [r7, #52]	; 0x34
+ 8000b1c:	2302      	movs	r3, #2
+ 8000b1e:	637b      	str	r3, [r7, #52]	; 0x34
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
- 8000b1e:	2300      	movs	r3, #0
- 8000b20:	63bb      	str	r3, [r7, #56]	; 0x38
+ 8000b20:	2300      	movs	r3, #0
+ 8000b22:	63bb      	str	r3, [r7, #56]	; 0x38
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL16;
- 8000b22:	f44f 1360 	mov.w	r3, #3670016	; 0x380000
- 8000b26:	63fb      	str	r3, [r7, #60]	; 0x3c
+ 8000b24:	f44f 1360 	mov.w	r3, #3670016	; 0x380000
+ 8000b28:	63fb      	str	r3, [r7, #60]	; 0x3c
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 8000b28:	f107 0318 	add.w	r3, r7, #24
- 8000b2c:	4618      	mov	r0, r3
- 8000b2e:	f000 fc17 	bl	8001360 <HAL_RCC_OscConfig>
- 8000b32:	4603      	mov	r3, r0
- 8000b34:	2b00      	cmp	r3, #0
- 8000b36:	d001      	beq.n	8000b3c <SystemClock_Config+0x50>
+ 8000b2a:	f107 0318 	add.w	r3, r7, #24
+ 8000b2e:	4618      	mov	r0, r3
+ 8000b30:	f000 fc16 	bl	8001360 <HAL_RCC_OscConfig>
+ 8000b34:	4603      	mov	r3, r0
+ 8000b36:	2b00      	cmp	r3, #0
+ 8000b38:	d001      	beq.n	8000b3e <SystemClock_Config+0x50>
   {
     Error_Handler();
- 8000b38:	f000 f870 	bl	8000c1c <Error_Handler>
+ 8000b3a:	f000 f86f 	bl	8000c1c <Error_Handler>
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 8000b3c:	230f      	movs	r3, #15
- 8000b3e:	607b      	str	r3, [r7, #4]
+ 8000b3e:	230f      	movs	r3, #15
+ 8000b40:	607b      	str	r3, [r7, #4]
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 8000b40:	2302      	movs	r3, #2
- 8000b42:	60bb      	str	r3, [r7, #8]
+ 8000b42:	2302      	movs	r3, #2
+ 8000b44:	60bb      	str	r3, [r7, #8]
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 8000b44:	2300      	movs	r3, #0
- 8000b46:	60fb      	str	r3, [r7, #12]
+ 8000b46:	2300      	movs	r3, #0
+ 8000b48:	60fb      	str	r3, [r7, #12]
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 8000b48:	f44f 6380 	mov.w	r3, #1024	; 0x400
- 8000b4c:	613b      	str	r3, [r7, #16]
+ 8000b4a:	f44f 6380 	mov.w	r3, #1024	; 0x400
+ 8000b4e:	613b      	str	r3, [r7, #16]
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 8000b4e:	2300      	movs	r3, #0
- 8000b50:	617b      	str	r3, [r7, #20]
+ 8000b50:	2300      	movs	r3, #0
+ 8000b52:	617b      	str	r3, [r7, #20]
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
- 8000b52:	1d3b      	adds	r3, r7, #4
- 8000b54:	2102      	movs	r1, #2
- 8000b56:	4618      	mov	r0, r3
- 8000b58:	f000 fe82 	bl	8001860 <HAL_RCC_ClockConfig>
- 8000b5c:	4603      	mov	r3, r0
- 8000b5e:	2b00      	cmp	r3, #0
- 8000b60:	d001      	beq.n	8000b66 <SystemClock_Config+0x7a>
+ 8000b54:	1d3b      	adds	r3, r7, #4
+ 8000b56:	2102      	movs	r1, #2
+ 8000b58:	4618      	mov	r0, r3
+ 8000b5a:	f000 fe81 	bl	8001860 <HAL_RCC_ClockConfig>
+ 8000b5e:	4603      	mov	r3, r0
+ 8000b60:	2b00      	cmp	r3, #0
+ 8000b62:	d001      	beq.n	8000b68 <SystemClock_Config+0x7a>
   {
     Error_Handler();
- 8000b62:	f000 f85b 	bl	8000c1c <Error_Handler>
+ 8000b64:	f000 f85a 	bl	8000c1c <Error_Handler>
   }
 }
- 8000b66:	bf00      	nop
- 8000b68:	3740      	adds	r7, #64	; 0x40
- 8000b6a:	46bd      	mov	sp, r7
- 8000b6c:	bd80      	pop	{r7, pc}
-	...
+ 8000b68:	bf00      	nop
+ 8000b6a:	3740      	adds	r7, #64	; 0x40
+ 8000b6c:	46bd      	mov	sp, r7
+ 8000b6e:	bd80      	pop	{r7, pc}
 
 08000b70 <MX_GPIO_Init>:
   * @brief GPIO Initialization Function

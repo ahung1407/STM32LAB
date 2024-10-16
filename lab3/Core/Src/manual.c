@@ -6,3 +6,19 @@
  */
 
 #include "manual.h"
+
+
+
+void init_manu(){
+
+}
+
+void run_manu(){
+	switch(status){
+	case MAN_GREEN_RED:
+		break;
+	default:
+		break;
+	}
+}
+

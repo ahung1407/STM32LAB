@@ -6,3 +6,5 @@
  */
 
 #include "global.h"
+
+int led_status = INIT;

@@ -94,18 +94,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 0;
-  HAL_GPIO_WritePin(LED_RED_GPIO_Port,LED_RED_Pin, SET);
-HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port,LED_YELLOW_Pin, RESET);
-  while (1)
-  {if(count >=2){
-	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port,LED_RED_Pin);
-	  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port,LED_YELLOW_Pin);
-	  count = 0;
-  }
 
-  	  count++;
-  	  HAL_Delay(7);
+  uint8_t Rh_byte1, Rh_byte2, Temp_byte1, Temp_byte2;
+  uint16_t SUM, RH, TEMP;
+
+  float Temperature = 0;
+  float Humidity = 0;
+  uint8_t Presence = 0;
+
+  while (1)
+  {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -199,7 +197,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|LED_RED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_RESET);
@@ -210,12 +208,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LED_RED_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin;
+  /*Configure GPIO pins : PA4 LED_RED_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|LED_RED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_RED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_YELLOW_Pin */
   GPIO_InitStruct.Pin = LED_YELLOW_Pin;

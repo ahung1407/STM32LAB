@@ -96,14 +96,33 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  init_ex9();
+  init_ex2();
 
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	  run_ex9();
-    /* USER CODE BEGIN 3 */
-  }
+	setTimer(2,1000);
+	int hour = 15, minute = 8, second = 50;
+
+while (1)
+{
+/* USER CODE END WHILE */
+DOT();
+run_index();
+if(isTimerExpired(2)==1){
+second++;
+if (second >= 60){
+ second = 0;
+ minute++;
+ }
+ if(minute >= 60){
+ minute = 0;
+ hour++;
+ }
+ if(hour >=24){
+hour = 0;
+ }
+ updateClockBuffer(hour,minute);
+setTimer(2,1000);}
+ /* USER CODE BEGIN 3 */
+}
   /* USER CODE END 3 */
 }
 
