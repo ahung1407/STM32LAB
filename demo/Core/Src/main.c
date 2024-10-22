@@ -22,7 +22,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "excercise1.h"
+
+#include "ex2.h"
+#include "ex3.h"
+#include "ex4.h"
+#include "ex5.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -90,11 +94,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  init_excercise1();
-
-  while (1)
-  {
-	  run_excercise1();
+ init_excercise4();
+ init_excercise5();
+  init_excercise3();
+  while(1){
+	 run_excercise3();
+	 run_excercise5();
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
@@ -118,7 +123,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL16;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -127,12 +134,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -152,23 +159,35 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin|LED_A1_Pin
+                          |LED_B1_Pin|LED_C1_Pin|LED_D1_Pin|LED_E1_Pin
+                          |LED_F1_Pin|LED_G1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_3B3_Pin
-                          |LED_4_Pin|LED_5_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LED_1_Pin|LED_3_Pin|LED_E_Pin|LED_F_Pin
+                          |LED_G_Pin|LED_2_Pin|LED_4_Pin|LED_5_Pin
+                          |LED_6_Pin|LED_A_Pin|LED_B_Pin|LED_C_Pin
+                          |LED_D_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin LED_GREEN_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin;
+  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin LED_GREEN_Pin LED_A1_Pin
+                           LED_B1_Pin LED_C1_Pin LED_D1_Pin LED_E1_Pin
+                           LED_F1_Pin LED_G1_Pin */
+  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin|LED_A1_Pin
+                          |LED_B1_Pin|LED_C1_Pin|LED_D1_Pin|LED_E1_Pin
+                          |LED_F1_Pin|LED_G1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin LED_3B3_Pin
-                           LED_4_Pin LED_5_Pin */
-  GPIO_InitStruct.Pin = LED_1_Pin|LED_2_Pin|LED_3_Pin|LED_3B3_Pin
-                          |LED_4_Pin|LED_5_Pin;
+  /*Configure GPIO pins : LED_1_Pin LED_3_Pin LED_E_Pin LED_F_Pin
+                           LED_G_Pin LED_2_Pin LED_4_Pin LED_5_Pin
+                           LED_6_Pin LED_A_Pin LED_B_Pin LED_C_Pin
+                           LED_D_Pin */
+  GPIO_InitStruct.Pin = LED_1_Pin|LED_3_Pin|LED_E_Pin|LED_F_Pin
+                          |LED_G_Pin|LED_2_Pin|LED_4_Pin|LED_5_Pin
+                          |LED_6_Pin|LED_A_Pin|LED_B_Pin|LED_C_Pin
+                          |LED_D_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
