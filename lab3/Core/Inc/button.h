@@ -1,20 +1,19 @@
-/*
- * button.h
- *
- *  Created on: Oct 16, 2024
- *      Author: admim
- */
-
 #ifndef INC_BUTTON_H_
 #define INC_BUTTON_H_
+
 #include "main.h"
 #include "software_timer.h"
 
-#define NORMAL_STATE GPIO_PIN_SET
-#define PRESSED_STATE GPIO_PIN_RESET
+// Định nghĩa trạng thái nút
+#define NORMAL_STATE GPIO_PIN_SET     // Nút không nhấn (Pull-up)
+#define PRESSED_STATE GPIO_PIN_RESET  // Nút được nhấn
 
-
-void getkeyinput();
-void subKeyProcess();
+// Số lượng nút bấm cần quản lý
+#define NUM_OF_BUTTONS 3
+extern int buttonFlags[NUM_OF_BUTTONS];
+// Khai báo các hàm xử lý
+void getKeyInput();              // Hàm đọc trạng thái tất cả các nút
+void subKeyProcess(int index);   // Xử lý khi nút được nhấn
+void longPressProcess(int index); // Xử lý khi nút được nhấn đè
 
 #endif /* INC_BUTTON_H_ */

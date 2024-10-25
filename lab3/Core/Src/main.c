@@ -98,7 +98,11 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if(buttonFlags[0]==1||buttonFlags[1]==1){
+		  buttonFlags[0] = 0;
+		  buttonFlags[1] = 0;
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -200,11 +204,17 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : but1_Pin */
-  GPIO_InitStruct.Pin = but1_Pin;
+  /*Configure GPIO pins : but1_Pin but2_Pin */
+  GPIO_InitStruct.Pin = but1_Pin|but2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(but1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : but3_Pin */
+  GPIO_InitStruct.Pin = but3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(but3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_RED_Pin */
   GPIO_InitStruct.Pin = LED_RED_Pin;
@@ -218,7 +228,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	timerRun();
-	getkeyinput();
+	getKeyInput();
 }
 /* USER CODE END 4 */
 
