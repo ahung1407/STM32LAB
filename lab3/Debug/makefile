@@ -64,8 +64,8 @@ all: main-build
 main-build: lab3_button.elf secondary-outputs
 
 # Tool invocations
-lab3_button.elf: $(OBJS) $(USER_OBJS) D:\BTL\VXL\lab3\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "lab3_button.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\BTL\VXL\lab3\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab3_button.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+lab3_button.elf: $(OBJS) $(USER_OBJS) C:\BTL\VXL\lab3\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "lab3_button.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\BTL\VXL\lab3\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab3_button.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
