@@ -27,7 +27,11 @@ void subKeyProcess(int index) {
 
     // Xử lý khi nút được nhấn
 }
-
+void clearbut(){
+	buttonFlags[0] = 0;
+	buttonFlags[1] = 0;
+	buttonFlags[2] = 0;
+}
 
 void getKeyInput() {
     for (int i = 0; i < NUM_OF_BUTTONS; i++) {

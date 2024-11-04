@@ -6,43 +6,38 @@
  */
 
 #include "automatic.h"
-#include "software_timer.h"
 
 void init_automatic(){
+	 	 HAL_GPIO_WritePin(RED_1_GPIO_Port, RED_1_Pin, SET);    // Đỏ sáng - Line 1
+	 	 HAL_GPIO_WritePin(YELLOW_1_GPIO_Port, YELLOW_1_Pin, SET); // Vàng tắt - Line 1
+	 	 HAL_GPIO_WritePin(GREEN_1_GPIO_Port, GREEN_1_Pin, SET);   // Xanh tắt - Line 1
 
+	    // Cấu hình Line 2
+	    HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, SET); // Xanh sáng - Line 2
+	    HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, SET); // Vàng tắt - Line 2
+	    HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, SET);
 }
 void automatic_run(){
 	switch(status){
 	case INIT:
-		if(1){
+		init_automatic();
+		setTimer(0, green_on);
 		status = GREEN_RED;
-		setTimer(0, 5000);
-		} // cau len chuyen trang thai
+		current_mode =  MODE_1;
+		setmode1(5,2);
 		break;
 	case GREEN_RED:
-		//TO DO
-		//traffic_green_red(); // nen tach traffic.h va traffic.c
-		if(isTimerExpired(0) == 1){
-			status = AMBER_RED;
-			setTimer(0, 2000);
-		}
-		if(isTimerExpired(2)==1){
-			// Update display
-			setTimer(2, 1000);
-		}
-		/*if(button1_flag == 1){
-			status = MAN_GREEN_RED;
-			button1_flag == 0;
-			setTimer(1,10000);
-			trong may trang thai can lam de kiem tra dau hieu chuyen trang thai
-		}*/
-			break;
+		init_green_red();
+		break;
 	case AMBER_RED:
-			break;
-	case RED_GRREN:
-			break;
+		init_amber_red();
+		break;
+	case RED_GREEN:
+		init_red_green();
+		break;
 	case RED_AMBER:
-			break;
+		init_red_amber();
+		break;
 	default:
 		break;
 	}

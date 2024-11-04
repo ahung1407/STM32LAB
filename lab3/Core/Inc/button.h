@@ -15,5 +15,5 @@ extern int buttonFlags[NUM_OF_BUTTONS];
 void getKeyInput();              // Hàm đọc trạng thái tất cả các nút
 void subKeyProcess(int index);   // Xử lý khi nút được nhấn
 void longPressProcess(int index); // Xử lý khi nút được nhấn đè
-
+void clearbut();
 #endif /* INC_BUTTON_H_ */

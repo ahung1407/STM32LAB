@@ -10,6 +10,7 @@ C_SRCS += \
 ../Core/Src/global.c \
 ../Core/Src/main.c \
 ../Core/Src/manual.c \
+../Core/Src/normal_state.c \
 ../Core/Src/softwaretimer.c \
 ../Core/Src/stm32f1xx_hal_msp.c \
 ../Core/Src/stm32f1xx_it.c \
@@ -23,6 +24,7 @@ OBJS += \
 ./Core/Src/global.o \
 ./Core/Src/main.o \
 ./Core/Src/manual.o \
+./Core/Src/normal_state.o \
 ./Core/Src/softwaretimer.o \
 ./Core/Src/stm32f1xx_hal_msp.o \
 ./Core/Src/stm32f1xx_it.o \
@@ -36,6 +38,7 @@ C_DEPS += \
 ./Core/Src/global.d \
 ./Core/Src/main.d \
 ./Core/Src/manual.d \
+./Core/Src/normal_state.d \
 ./Core/Src/softwaretimer.d \
 ./Core/Src/stm32f1xx_hal_msp.d \
 ./Core/Src/stm32f1xx_it.d \

@@ -10,7 +10,6 @@
 
 #include "main.h"
 #include "global.h"
-
 void init_automatic();
 void automatic_run();
 

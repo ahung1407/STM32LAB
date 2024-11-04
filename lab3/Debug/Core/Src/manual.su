@@ -1,2 +1,3 @@
 manual.c:12:6:init_manu	4	static
-manual.c:16:6:run_manu	4	static
+manual.c:16:6:run_manu	8	static
+manual.c:38:6:switch_mode	8	static

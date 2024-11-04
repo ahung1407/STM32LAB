@@ -1,0 +1,17 @@
+normal_state.c:8:6:display7SEG	16	static
+normal_state.c:115:6:clearbuffer	4	static
+normal_state.c:121:6:update7SEG	16	static
+normal_state.c:165:6:scanled	8	static
+normal_state.c:176:6:return_mode1	8	static
+normal_state.c:184:6:setmode1	16	static
+normal_state.c:192:6:decrease_time_mode1	8	static
+normal_state.c:202:6:setmodecus	16	static
+normal_state.c:213:6:setduration	16	static
+normal_state.c:219:6:init_green_red	8	static
+normal_state.c:246:6:init_amber_red	8	static
+normal_state.c:261:6:init_red_green	8	static
+normal_state.c:278:6:init_red_amber	8	static
+normal_state.c:294:6:model_2	8	static
+normal_state.c:317:6:init_man_red	8	static
+normal_state.c:343:6:init_man_yellow	8	static
+normal_state.c:364:6:init_man_green	8	static
