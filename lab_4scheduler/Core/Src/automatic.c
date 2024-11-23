@@ -21,7 +21,8 @@ void automatic_run(){
 	switch(status){
 	case INIT:
 		init_automatic();
-		setTimer(0, green_on);
+		//setTimer(0, green_on);
+		counter_green_on =  8;
 		status = GREEN_RED;
 		current_mode =  MODE_1;
 		setmode1(red_state	,green_state);

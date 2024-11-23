@@ -13,7 +13,7 @@ void init_green_red(void);
 void init_amber_red(void);
 void init_red_green(void);
 void init_red_amber(void);
-
+void led_test();
 void init_man_red();
 void init_man_yellow();
 void init_man_green();

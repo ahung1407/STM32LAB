@@ -23,7 +23,8 @@ int update_time_yellow = 500;
 int update_time_green = 500;
 int scan_led = 200;
 int duration = 0;
-
+int counter_green_on = 8;
+int counter_amber_on = 12;
 int mode = 1;
 
 int current_mode = 1;

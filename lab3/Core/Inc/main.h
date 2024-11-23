@@ -82,7 +82,7 @@ void Error_Handler(void);
 #define En2_GPIO_Port GPIOB
 #define En3_Pin GPIO_PIN_2
 #define En3_GPIO_Port GPIOB
-#define but3_Pin GPIO_PIN_11
+#define but3_Pin GPIO_PIN_10
 #define but3_GPIO_Port GPIOB
 #define D0_Pin GPIO_PIN_8
 #define D0_GPIO_Port GPIOA

@@ -174,23 +174,32 @@ void update7SEG(int index){
 }
 int run = 1;
 void scanled(){
-	if(isTimerExpired(2)==1){
-		clearled();
+		//clearled();
 		update7SEG(run);
 		run++;
-		setTimer(2, scan_led);
 		if(run>4){
 			run = 0;
 		}
-	}
 
+}
+int counter_led = 5;
+void led_test(){
+	counter_led--;
+
+	if(counter_led==0){
+		counter_led = 5;
+		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	}
 }
 void return_mode1(){
 	if(buttonFlags[2]==1){
-		clearbut();
-		setTimer(0, green_on);
+		buttonFlags[2]=0;
 		status = GREEN_RED;
+		//setTimer(0, green_on);
+		counter_green_on= green_state*4;
 		setmode1(red_state,green_state);
+		init_automatic();
+		current_mode = MODE_1;
 	}
 }
 void setmode1(int line1, int line2){
@@ -201,8 +210,10 @@ void setmode1(int line1, int line2){
 	led_buffer[2] = line2/10;
 	led_buffer[3] = line2%10;
 }
+int counter_decrese = 4;
 void decrease_time_mode1(){
-	if(isTimerExpired(4)==1){
+	counter_decrese--;
+	if(counter_decrese==0){
 		if(led_buffer[0]!=0){
 		led_buffer[0]--;}
 		if(led_buffer[1]!=0){
@@ -211,7 +222,7 @@ void decrease_time_mode1(){
 				led_buffer[2]--;}
 		if(led_buffer[3]!=0){
 				led_buffer[3]--;}
-		setTimer(4, 1000);
+		counter_decrese=4;
 	}
 }
 
@@ -240,16 +251,19 @@ void init_green_red(void){
 		    HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, RESET); // Xanh sáng - Line 2
 		    HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, SET); // Vàng tắt - Line 2
 		    HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, SET);
-		   if(isTimerExpired(0)==1){
-			   	setTimer(0, yellow_on);
+		    counter_green_on--;
+		   if(counter_green_on==0){
+			   	//setTimer(0, yellow_on);
+			   	counter_amber_on = yellow_state*4;
 		        status = AMBER_RED;
 		        setmode1(yellow_state,yellow_state);
 			}
 		   if(buttonFlags[0]==1){
 			   status = MAN_RED;
 			   init_automatic();
-			   setTimer(0, time_stage_2);
-			   setTimer(1, update_time_red);
+			   //setTimer(0, time_stage_2);
+			   time_stage_2 = 40;
+			   update_time_red = 2;
 			   clearbut();
 			   HAL_GPIO_WritePin(RED_1_GPIO_Port, RED_1_Pin, RESET);
 			   	HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, RESET);
@@ -263,13 +277,14 @@ void init_amber_red(void){ // on vang
 				HAL_GPIO_WritePin(RED_1_GPIO_Port, RED_1_Pin, RESET);    // Đỏ sáng - Line 1
 			 	 HAL_GPIO_WritePin(YELLOW_1_GPIO_Port, YELLOW_1_Pin, SET); // Vàng tắt - Line 1
 			 	 HAL_GPIO_WritePin(GREEN_1_GPIO_Port, GREEN_1_Pin, SET);   // Xanh tắt - Line 1
-
+			 	 counter_amber_on--;
 			    // Cấu hình Line 2
 			    HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, SET); // Xanh sáng - Line 2
 			    HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, RESET); // Vàng tắt - Line 2
 			    HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, SET);
-	if(isTimerExpired(0)==1){
-		setTimer(0, green_on);
+	if(counter_amber_on==0){
+		//setTimer(0, green_on);
+		counter_green_on= green_state*4;
 		status = RED_GREEN;
 		setmode1(green_state,red_state);
 	}
@@ -283,11 +298,11 @@ void init_red_green(void){
 			    HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, SET); // Xanh sáng - Line 2
 			    HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, SET); // Vàng tắt - Line 2
 			    HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, RESET);
-
-	if(isTimerExpired(0)==1){
+			    counter_green_on--;
+	if(counter_green_on==0){
 		 	 	   // on do line 2
 				setmode1(yellow_state,yellow_state);
-		        setTimer(0, yellow_on);
+				counter_amber_on = yellow_state*4;
 		        status = RED_AMBER;
 	}
 }
@@ -300,9 +315,10 @@ void init_red_amber(void){
 			    HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, SET); // Xanh sáng - Line 2
 			    HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, SET); // Vàng tắt - Line 2
 			    HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, RESET);
-
-	if(isTimerExpired(0)==1){
-		 setTimer(0, green_on);
+			    counter_amber_on--;
+	if(counter_amber_on==0){
+		 //setTimer(0, green_on);
+		counter_green_on = green_state*4;
 		 status = GREEN_RED;
 		 setmode1(red_state,green_state);
 	}
@@ -334,65 +350,69 @@ void model_2(){
 }
 
 void init_man_red(){
-
-	if(isTimerExpired(1)==1){
+	//return_mode1();
+	update_time_red--;
+	time_stage_2--;
+	if(update_time_red==0){
 		HAL_GPIO_TogglePin(RED_1_GPIO_Port, RED_1_Pin);
 		HAL_GPIO_TogglePin(RED_2_GPIO_Port, RED_2_Pin);
-		setTimer(1, update_time_red);
+		//setTimer(1, update_time_red);
+		update_time_green = 2;
 	}
 	if(buttonFlags[0]==1){
 		buttonFlags[0]= 0;
 		status = MAN_YELLOW;
-		setTimer(0,time_stage_2);
+		time_stage_2 = 50;
 		init_automatic();
-		setTimer(1, update_time_yellow);
+		update_time_yellow = 2;
 		HAL_GPIO_WritePin(YELLOW_1_GPIO_Port, YELLOW_1_Pin, RESET);
-			HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, RESET);
-			setmodecus(3);
-			duration = 0;
+		HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, RESET);
+		setmodecus(3);
+		duration = 0;
 
 	}
-	if(isTimerExpired(0)==1){
+	if(time_stage_2==0){
 		status = GREEN_RED;
-		setTimer(0, green_on);
+		//setTimer(0, green_on);
+		counter_green_on = green_state*4;
 		init_automatic();
 	}
-	return_mode1();
+
 }
 void init_man_yellow(){
-
-	if (isTimerExpired(1) == 1) {
+	update_time_yellow--;
+	time_stage_2--;
+	if (update_time_yellow==0) {
 	    HAL_GPIO_TogglePin(YELLOW_1_GPIO_Port, YELLOW_1_Pin);
 	    HAL_GPIO_TogglePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin);
-	    setTimer(1, update_time_yellow);
+	    //setTimer(1, update_time_yellow);
+	    update_time_yellow =2;
 	}
 	if(buttonFlags[0]==1){
 			buttonFlags[0]= 0;
 			status = MAN_GREEN;
-			setTimer(0,time_stage_2);
+			//setTimer(0,time_stage_2);
+			update_time_yellow=40;
 			init_automatic();
-			setTimer(1, update_time_green);
+			//setTimer(1, update_time_green);
+			update_time_green=2;
 			HAL_GPIO_WritePin(GREEN_1_GPIO_Port, GREEN_1_Pin, RESET);
-				HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, RESET);
-				setmodecus(4);
-				duration = 0;
+			HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, RESET);
+			setmodecus(4);
+			duration = 0;
 
 		}
-	return_mode1();
+	//return_mode1();
 }
 void init_man_green(){
-	if (isTimerExpired(1) == 1) {
+		update_time_green--;
+		time_stage_2--;
+	if (update_time_green==0) {
 	    HAL_GPIO_TogglePin(GREEN_1_GPIO_Port, GREEN_1_Pin);
 	    HAL_GPIO_TogglePin(GREEN_2_GPIO_Port, GREEN_2_Pin);
-	    setTimer(1, update_time_green);
+	    //setTimer(1, update_time_green);
+	    update_time_green=2;
 	}
-	if(buttonFlags[0]==1){
-			buttonFlags[0]= 0;
-			status = GREEN_RED;
-			setTimer(0,green_on);
-			init_automatic();
-			current_mode = MODE_1;
-		}
 	return_mode1();
 }
 

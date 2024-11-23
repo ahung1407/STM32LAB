@@ -26,6 +26,7 @@
 #include "automatic.h"
 #include "manual.h"
 #include "normal_state.h"
+#include "scheduler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,13 +100,16 @@ int main(void)
   status = INIT;
   setTimer(2, 250);
   setTimer(4,1000);
+  SCH_Add_Task(scanled, 25, 25);
+  SCH_Add_Task(led_test, 100, 40);
+  SCH_Add_Task(automatic_run, 25, 25);
+  SCH_Add_Task(switch_mode, 25, 25);
+  SCH_Add_Task(run_manu, 25, 25);
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
   while (1)
   {
     /* USER CODE END WHILE */
-	  automatic_run();
-	  run_manu();
-	  switch_mode();
-	  scanled();
+	  SCH_Dispatch_Tasks();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -250,7 +254,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	timerRun();
+	SCH_Update();
 	getKeyInput();
 }
 /* USER CODE END 4 */

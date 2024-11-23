@@ -103,9 +103,9 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  automatic_run();
-	  run_manu();
-	  switch_mode();
-	  scanled();
+	 	  run_manu();
+	 	  switch_mode();
+	 	  scanled();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -240,11 +240,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : but3_Pin */
-  GPIO_InitStruct.Pin = but3_Pin;
+  /*Configure GPIO pins : but3_Pin PB11 */
+  GPIO_InitStruct.Pin = but3_Pin|GPIO_PIN_11;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(but3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 

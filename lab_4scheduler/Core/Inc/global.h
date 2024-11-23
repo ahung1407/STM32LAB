@@ -31,6 +31,8 @@ extern int current_mode;
 extern int update_time_red;
 extern int update_time_yellow;
 extern int update_time_green;
+extern int counter_green_on;
+extern int counter_amber_on;
 #define MAN_RED 13
 #define MAN_GREEN 14
 #define MAN_YELLOW 15

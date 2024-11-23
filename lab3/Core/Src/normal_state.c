@@ -187,10 +187,13 @@ void scanled(){
 }
 void return_mode1(){
 	if(buttonFlags[2]==1){
-		clearbut();
-		setTimer(0, green_on);
+		buttonFlags[2]=0;
+		init_automatic();
+		clearled();
 		status = GREEN_RED;
+		setTimer(0, green_on);
 		setmode1(red_state,green_state);
+		current_mode = MODE_1;
 	}
 }
 void setmode1(int line1, int line2){
@@ -392,6 +395,7 @@ void init_man_green(){
 			setTimer(0,green_on);
 			init_automatic();
 			current_mode = MODE_1;
+			setmode1(red_state,green_state);
 		}
 	return_mode1();
 }

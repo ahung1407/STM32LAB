@@ -18,7 +18,7 @@ int TimerForKeyPress[NUM_OF_BUTTONS] = {200};  // Dùng cho nhấn đè
 int buttonFlags[NUM_OF_BUTTONS] = {0};  // Mảng cờ cho từng nút
 
 // Cấu hình chân GPIO tương ứng với từng nút
-GPIO_TypeDef* buttonPorts[NUM_OF_BUTTONS] = {but1_GPIO_Port, GPIOC, GPIOC};
+GPIO_TypeDef* buttonPorts[NUM_OF_BUTTONS] = {but1_GPIO_Port, GPIOC, but3_GPIO_Port};
 uint16_t buttonPins[NUM_OF_BUTTONS] = {but1_Pin, but2_Pin, but3_Pin};
 
 void subKeyProcess(int index) {
@@ -48,7 +48,7 @@ void getKeyInput() {
                 KeyReg3[i] = KeyReg2[i];
 
                 if (KeyReg2[i] == PRESSED_STATE) {  // Nút được nhấn
-                    TimerForKeyPress[i] = 200;  // Reset timer cho nhấn đè
+                     // Reset timer cho nhấn đè
                     subKeyProcess(i);  // Gọi hàm xử lý khi nhấn
                 }
             } else {  // Kiểm tra nhấn đè
