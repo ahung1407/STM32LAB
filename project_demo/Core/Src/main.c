@@ -19,10 +19,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "i2c-lcd.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "i2c-lcd.h"
+#include "test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,18 +94,22 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   lcd_init();
+  lcd_clear_display();       // Xóa màn hình LCD
+
+	    lcd_goto_XY(0, 0);         // Di chuyển con tr�? đến hàng 1, cột 0
+	    lcd_send_string("hello_"); // In "hello_" ở hàng đầu tiên
+	    lcd_goto_XY(1, 0);         // Di chuyển con tr�? đến hàng 2, cột 0
+	    lcd_send_string("world");  // In "world" ở hàng thứ hai
   while (1)
   {
     /* USER CODE END WHILE */
-	  lcd_clear_display();
-	  lcd_goto_XY(0, 5);
-	  lcd_send_string("HELLO_WORLD");
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -156,7 +161,7 @@ static void MX_I2C1_Init(void)
 {
 
   /* USER CODE BEGIN I2C1_Init 0 */
-
+	//HAL_I2C_Init(&hi2c1);
   /* USER CODE END I2C1_Init 0 */
 
   /* USER CODE BEGIN I2C1_Init 1 */
